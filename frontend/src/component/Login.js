@@ -1,17 +1,35 @@
-import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState } from "react";
 import axios from "axios";
+import { useContext } from "react";
+import { UserContext } from "../App";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const Login = () => {
+  const { user, setUser } = useContext(UserContext);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const authSuccess = () => {
+    console.log("you've logged in");
+    if (user.loggedIn) return;
+    setUser({ loggedIn: true });
+
+    if (location.state?.from) {
+      navigate(location.state.from);
+    }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("http://localhost:5000/login", { username, password });
-      navigate("/");
+      await axios
+        .post("http://localhost:5000/login", { username, password })
+        .then(() => {
+          authSuccess();
+          navigate("/secret");
+        });
     } catch (error) {
       console.log(error.response.status);
       if (error.response.status !== 200) {
@@ -47,7 +65,6 @@ const Login = () => {
               console.log(e.target.value);
             }}
           />
-
           <button type="submit">login</button>
         </form>
       </div>
