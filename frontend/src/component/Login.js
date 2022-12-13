@@ -26,9 +26,10 @@ const Login = () => {
     try {
       await axios
         .post("http://localhost:5000/login", { username, password })
-        .then(() => {
+        .then((response) => {
           authSuccess();
-          navigate("/secret");
+          console.log(response.data);
+          navigate(`/secret/${response.data}`);
         });
     } catch (error) {
       console.log(error.response.status);
@@ -52,7 +53,7 @@ const Login = () => {
             value={username}
             onChange={(e) => {
               setUsername(e.target.value);
-              console.log(e.target.value);
+              // console.log(e.target.value);
             }}
           />
           <input
@@ -62,7 +63,7 @@ const Login = () => {
             value={password}
             onChange={(e) => {
               setPassword(e.target.value);
-              console.log(e.target.value);
+              // console.log(e.target.value);
             }}
           />
           <button type="submit">login</button>

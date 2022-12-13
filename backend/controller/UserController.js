@@ -14,7 +14,7 @@ export const getUserById = async (req, res) => {
     const user = await Users.findById(req.params.id);
     res.json(user);
   } catch (error) {
-    const status = res.status(404).json({ message: message.error });
+    const status = res.status(404).json({ message: error.message });
     console.log(status);
   }
 };

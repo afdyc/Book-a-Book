@@ -14,8 +14,8 @@ const View = () => {
           <Route path="/register" element={<Register />} />
           <Route path="/" element={<Login />} />
           <Route element={<ProtectedRoute />}>
-            <Route path="/home" element={<Home />} />
-            <Route path="/secret" element={<Secret />} />
+            <Route path="/home/:id" element={<Home />} />
+            <Route path="/secret/:id" element={<Secret />} />
           </Route>
         </Routes>
       </div>

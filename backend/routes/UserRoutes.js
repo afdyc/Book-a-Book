@@ -33,7 +33,7 @@ router.post("/login", function (req, res) {
     if (user) {
       if (user.password === passwd) {
         console.log("logged in");
-        return res.status(200).send();
+        return res.json(user._id);
       } else if (user.password !== passwd) {
         // console.log("Password is incorrect");
         return res.status(404).send();
