@@ -5,6 +5,7 @@ const Register = () => {
   const [fullname, setFullname] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const book = "";
 
   const registerUser = async (e) => {
     e.preventDefault();
@@ -13,6 +14,7 @@ const Register = () => {
         fullname,
         username,
         password,
+        book,
       });
     } catch (error) {
       console.log(error);
