@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useState } from "react";
+import { motion } from "framer-motion";
 import { useParams, useNavigate } from "react-router-dom";
 
 const Home = () => {
@@ -37,34 +38,76 @@ const Home = () => {
   };
 
   //this function is to get the detail of which book a user trying to borrow
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(id);
-    console.log(bookTitle.title);
-    console.log(bookAuthor.author);
-    console.log(bookThumbnail.thumbnail);
+    const userId = id;
+    const title = bookTitle.title;
+    const author = bookAuthor.author;
+    const thumbnail = bookThumbnail.thumbnail;
+
+    try {
+      await axios.post(`http://localhost:5000/booksborrowed`, {
+        userId,
+        title,
+        author,
+        thumbnail,
+      });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
     <>
-      {/* search books */}
-      <div>
-        <h1 className="text-9xl">THIS IS HOME</h1>
-        <button onClick={goSecret}>secret</button>
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.75, ease: "easeOut" }}
+        exit={{ opacity: 0 }}
+        className="w-full h-screen bg-gradient-to-r from-pink-100 to-cyan-100 md:flex flex-col justify-center items-center"
+      >
+        <div className="flex flex-col w-[400px] h-screen md:w-[1500px] mx-auto items-center justify-center">
+          <div className="inline">
+            <h1 className="text-4xl text-center font-bold md:text-6xl py-4 mt-10 mb-10 md:mt-0 border-b-4 border-[#92B4EC] md:text-left">
+              Book a book now!
+            </h1>
+            {/* <h1 className="text-center text-xl font-bold py-10 md:text-2xl">
+              Search a book you want to borrow
+            </h1> */}
+          </div>
 
-        <form onSubmit={handleClick}>
-          <input
-            onChange={(e) => {
-              console.log(e.target.value);
-              setUserSearch(e.target.value);
-            }}
-            type="text"
-            placeholder="What book are you looking for ?"
-            value={userSearch}
-          />
-          <button type="submit">Search</button>
-        </form>
-      </div>
+          {/* search books */}
+          <form
+            onSubmit={handleClick}
+            className="w-2/3 h-[125px] text-center flex flex-col justify-center items-center"
+          >
+            <input
+              onChange={(e) => {
+                console.log(e.target.value);
+                setUserSearch(e.target.value);
+              }}
+              className="w-2/3 h-2/3 border-solid bg-[#DADCE0] px-3 rounded-lg p-2 mx-1 mb-6"
+              type="text"
+              placeholder="Type the title of the book here"
+              value={userSearch}
+            />
+            <button
+              className="w-[200px] h-[70px] border-solid border-2 rounded-full py-2 px-2 border-[#1d90f5] bg-[#1d90f5] text-white text-sm p-[6px] mx-1 shadow-md shadow-gray-400 hover:bg-[#44546E] hover:border-[#44546E] duration-300"
+              type="submit"
+            >
+              Search
+            </button>
+          </form>
+        </div>
+      </motion.div>
+      <button
+        onClick={goSecret}
+        className="w-max-[175px] border-solid border-2 rounded-md border-[#92B4EC] bg-[#92B4EC] text-white text-sm p-[6px] mx-1 shadow-md shadow-gray-400"
+      >
+        secret
+      </button>
+
+      <div className="w-full h-screen grid grid-cols-2 items-center mx-auto py-5 text-center sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5"></div>
 
       {/* get book info */}
       <div>

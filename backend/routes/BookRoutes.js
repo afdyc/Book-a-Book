@@ -9,6 +9,6 @@ const router = express.Router();
 
 router.get("/borrowedbooklist", borrowedBookList);
 router.post("/booksborrowed", saveBook);
-router.delete("/deletebook/:id  ", deleteBook);
+router.delete("/deletebook/:id", deleteBook);
 
 export default router;

@@ -23,7 +23,7 @@ export const saveBook = async (req, res) => {
 
 export const deleteBook = async (req, res) => {
   try {
-    const discardBook = await Books.deleteOne({ id: req.params.id });
+    const discardBook = await Books.deleteOne({ _id: req.params.id });
     res.status(200).json(discardBook);
   } catch (error) {
     const status = res.status(400).json({ message: error.message });
