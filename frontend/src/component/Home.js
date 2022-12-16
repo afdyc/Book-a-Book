@@ -6,12 +6,17 @@ const Home = () => {
   const { id } = useParams();
   const [userSearch, setUserSearch] = useState("");
   const [googleBook, setGoogleBook] = useState([]);
+  const [bookTitle, setBookTitle] = useState("");
+  const [bookAuthor, setBookAuthor] = useState("");
+  const [bookThumbnail, setBookThumbnail] = useState("");
   const navigate = useNavigate();
 
+  //to go to user's page
   const goSecret = () => {
     navigate(`/secret/${id}`);
   };
 
+  //this function is to search book from google API
   const handleClick = async (e) => {
     e.preventDefault();
     try {
@@ -31,42 +36,70 @@ const Home = () => {
     }
   };
 
+  //this function is to get the detail of which book a user trying to borrow
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(id);
+    console.log(bookTitle.title);
+    console.log(bookAuthor.author);
+    console.log(bookThumbnail.thumbnail);
+  };
+
   return (
-    <div>
-      <h1 className="text-9xl">THIS IS HOME</h1>
-      <button onClick={goSecret}>secret</button>
+    <>
+      {/* search books */}
+      <div>
+        <h1 className="text-9xl">THIS IS HOME</h1>
+        <button onClick={goSecret}>secret</button>
 
-      <form onSubmit={handleClick}>
-        <input
-          onChange={(e) => {
-            console.log(e.target.value);
-            setUserSearch(e.target.value);
-          }}
-          type="text"
-          placeholder="What book are you looking for ?"
-          value={userSearch}
-        />
-        <button type="submit">Search</button>
+        <form onSubmit={handleClick}>
+          <input
+            onChange={(e) => {
+              console.log(e.target.value);
+              setUserSearch(e.target.value);
+            }}
+            type="text"
+            placeholder="What book are you looking for ?"
+            value={userSearch}
+          />
+          <button type="submit">Search</button>
+        </form>
+      </div>
 
-        {/* below is the latest update */}
+      {/* get book info */}
+      <div>
         {googleBook.map((book) => {
+          //let bookId = book.id;
+          let author = book.volumeInfo.authors;
+          let title = book.volumeInfo.title;
           let thumbnail =
             book.volumeInfo.imageLinks &&
             book.volumeInfo.imageLinks.smallThumbnail;
-          let author = book.volumeInfo.authors;
-          let title = book.volumeInfo.title;
 
           if (thumbnail !== undefined && author !== undefined) {
             return (
               <>
-                <li>{title}</li>
-                <li>{author}</li>
+                <form onSubmit={handleSubmit}>
+                  <img src={thumbnail} alt="Book Cover" />
+                  <p>{title}</p>
+                  <p>{author}</p>
+                  <button
+                    onClick={() => {
+                      setBookTitle({ title });
+                      setBookAuthor({ author });
+                      setBookThumbnail({ thumbnail });
+                    }}
+                    type="submit"
+                  >
+                    book
+                  </button>
+                </form>
               </>
             );
           }
         })}
-      </form>
-    </div>
+      </div>
+    </>
   );
 };
 
