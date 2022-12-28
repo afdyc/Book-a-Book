@@ -68,7 +68,7 @@ const Home = () => {
       >
         <div className="flex flex-col w-[400px] h-screen md:w-[1500px] mx-auto items-center justify-center">
           <div className="inline">
-            <h1 className="text-4xl text-center font-bold md:text-6xl py-4 mt-10 mb-10 md:mt-0 border-b-4 border-[#92B4EC] md:text-left">
+            <h1 className="text-4xl text-center font-bold md:text-6xl py-2 mt-10 mb-10 md:mt-0 border-b-2 border-[#1d90f5] md:text-left">
               Book a book now!
             </h1>
             {/* <h1 className="text-center text-xl font-bold py-10 md:text-2xl">
