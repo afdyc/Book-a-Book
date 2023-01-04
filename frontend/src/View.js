@@ -8,18 +8,20 @@ import ProtectedRoute from "./ProtectedRoute";
 
 const View = () => {
   return (
-    <Router>
-      <div>
-        <Routes>
-          <Route path="/register" element={<Register />} />
-          <Route path="/" element={<Login />} />
-          <Route element={<ProtectedRoute />}>
-            <Route path="/home/:id" element={<Home />} />
-            <Route path="/secret/:id" element={<Secret />} />
-          </Route>
-        </Routes>
-      </div>
-    </Router>
+    <>
+      <Router>
+        <div>
+          <Routes>
+            <Route path="/register" element={<Register />} />
+            <Route path="/" element={<Login />} />
+            <Route element={<ProtectedRoute />}>
+              <Route path="/home/:id" element={<Home />} />
+              <Route path="/secret/:id" element={<Secret />} />
+            </Route>
+          </Routes>
+        </div>
+      </Router>
+    </>
   );
 };
 

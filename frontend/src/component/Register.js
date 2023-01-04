@@ -34,8 +34,20 @@ const Register = () => {
       exit={{ opacity: 0 }}
       className="w-full h-screen flex flex-col items-center md:grid grid-cols-2 md:pr-0"
     >
+      <div className="w-full h-screen hidden md:flex flex-col justify-center items-center bg-gradient-to-r from-white to-pink-100 px-[60px]">
+        <motion.h1
+          animate={{ opacity: 1 }}
+          initial={{ opacity: 0 }}
+          transition={{ delay: 0.75, duration: 0.75 }}
+          className="text-[55px] leading-[47px] font-bold text-center"
+        >
+          “A reader lives a thousand lives before he dies.”{" "}
+          <span className="text-[#1d90f5]">-</span> George R. R. Martin
+        </motion.h1>
+      </div>
+
       <form
-        className="w-full h-full flex flex-col justify-center md:px-[150px] bg-gradient-to-r from-white to-pink-100 px-[40px]"
+        className="w-full h-full flex flex-col justify-center md:px-[150px] bg-gradient-to-r from-pink-100 to-cyan-100 px-[40px]"
         onSubmit={registerUser}
       >
         <div className="w-full flex flex-col -mt-10">

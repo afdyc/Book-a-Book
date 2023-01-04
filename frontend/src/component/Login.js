@@ -30,7 +30,7 @@ const Login = () => {
         .then((response) => {
           authSuccess();
           console.log(response.data);
-          navigate(`/secret/${response.data}`);
+          navigate(`/home/${response.data}`);
         });
     } catch (error) {
       console.log(error.response.status);
@@ -48,20 +48,8 @@ const Login = () => {
       exit={{ opacity: 1 }}
       className="w-full h-screen flex flex-col items-center md:grid grid-cols-2 md:pr-0"
     >
-      <div className="w-full h-screen hidden md:flex flex-col justify-center items-center bg-gradient-to-r from-white to-pink-100 px-[60px]">
-        <motion.h1
-          animate={{ opacity: 1 }}
-          initial={{ opacity: 0 }}
-          transition={{ delay: 0.75, duration: 0.75 }}
-          className="text-[55px] leading-[47px] font-bold text-center"
-        >
-          “A reader lives a thousand lives before he dies.”{" "}
-          <span className="text-[#1d90f5]">-</span> George R. R. Martin
-        </motion.h1>
-      </div>
-
       <form
-        className="w-full h-full flex flex-col justify-center md:px-[150px] bg-gradient-to-r from-pink-100 to-cyan-100"
+        className="w-full h-full flex flex-col justify-center md:px-[150px] bg-gradient-to-r from-white to-pink-100"
         onSubmit={handleSubmit}
       >
         <div className="flex flex-col -mt-10 px-[40px]">
@@ -159,6 +147,61 @@ const Login = () => {
           </motion.div>
         </div>
       </form>
+      <div className="w-full h-screen hidden md:flex flex-col justify-center items-start bg-gradient-to-r from-pink-100 to-cyan-100 px-[60px] pb-[175px]">
+        <motion.h1
+          animate={{ opacity: 1 }}
+          initial={{ opacity: 0 }}
+          transition={{ delay: 0.75, duration: 0.75 }}
+          className="text-[40px] leading-[100px] font-bold"
+        >
+          How To Use This Website :
+        </motion.h1>
+        <motion.h1
+          animate={{ opacity: 1 }}
+          initial={{ opacity: 0 }}
+          transition={{ delay: 0.75, duration: 0.75 }}
+          className="text-[20px] font-bold"
+        >
+          <span className="text-[#1d90f5]">1. </span>
+          If you dont have an account please register first
+        </motion.h1>
+        <motion.h1
+          animate={{ opacity: 1 }}
+          initial={{ opacity: 0 }}
+          transition={{ delay: 0.75, duration: 0.75 }}
+          className="text-[20px] font-bold"
+        >
+          <span className="text-[#1d90f5]">2. </span>
+          Log in using your account through Log In page
+        </motion.h1>
+        <motion.h1
+          animate={{ opacity: 1 }}
+          initial={{ opacity: 0 }}
+          transition={{ delay: 0.75, duration: 0.75 }}
+          className="text-[20px] font-bold"
+        >
+          <span className="text-[#1d90f5]">3. </span>
+          Now you can search a book that you want to borrow
+        </motion.h1>
+        <motion.h1
+          animate={{ opacity: 1 }}
+          initial={{ opacity: 0 }}
+          transition={{ delay: 0.75, duration: 0.75 }}
+          className="text-[20px] font-bold"
+        >
+          <span className="text-[#1d90f5]">4. </span>
+          Click "book" button to book the book
+        </motion.h1>
+        <motion.h1
+          animate={{ opacity: 1 }}
+          initial={{ opacity: 0 }}
+          transition={{ delay: 0.75, duration: 0.75 }}
+          className="text-[20px] font-bold"
+        >
+          <span className="text-[#1d90f5]">5. </span>
+          Check all the books you have booked in your "Account" page
+        </motion.h1>
+      </div>
     </motion.div>
   );
 };
