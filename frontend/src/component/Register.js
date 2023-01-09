@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import axios from "axios";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Register = () => {
   const [fullname, setFullname] = useState("");
@@ -13,17 +15,29 @@ const Register = () => {
   const registerUser = async (e) => {
     e.preventDefault();
     try {
-      await axios
-        .post(`http://localhost:5000/users`, {
-          fullname,
-          username,
-          password,
-          book,
-        })
-        .then(() => navigate("/"));
+      await axios.post(`https://bookabookbackend.tech.afdyclinton.com/users`, {
+        fullname,
+        username,
+        password,
+        book,
+      });
+      // .then(() => navigate("/"));
     } catch (error) {
       console.log(error);
     }
+  };
+
+  const notify = () => {
+    toast.success("Your account has been created.", {
+      position: "top-center",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: false,
+      progress: undefined,
+      theme: "light",
+    });
   };
 
   return (
@@ -141,11 +155,13 @@ const Register = () => {
             className="mt-20 flex justify-center text-white"
           >
             <button
+              onClick={notify}
               className="w-1/2 h-[60px] border-[#1d90f5] bg-[#1d90f5] py-2 px-2 rounded-full shadow-black shadow-2xl hover:bg-[#44546E] hover:border-[#44546E] duration-300"
               type="submit"
             >
               Register
             </button>
+            <ToastContainer className="mt-[100px]" />
           </motion.div>
         </div>
       </form>

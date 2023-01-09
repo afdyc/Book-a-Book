@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+const mongoose = require("mongoose");
 
 const BookSchema = mongoose.Schema({
   userId: { type: String, required: true },
@@ -7,4 +7,4 @@ const BookSchema = mongoose.Schema({
   thumbnail: { type: String, required: true },
 });
 
-export default mongoose.model("Books", BookSchema);
+module.exports = mongoose.model("Books", BookSchema);

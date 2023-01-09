@@ -3,6 +3,8 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { useParams } from "react-router-dom";
 import Navbar from "./Navbar";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Home = () => {
   const { id } = useParams();
@@ -41,15 +43,31 @@ const Home = () => {
     const thumbnail = bookThumbnail.thumbnail;
 
     try {
-      await axios.post(`http://localhost:5000/booksborrowed`, {
-        userId,
-        title,
-        author,
-        thumbnail,
-      });
+      await axios.post(
+        `https://bookabookbackend.tech.afdyclinton.com/booksborrowed`,
+        {
+          userId,
+          title,
+          author,
+          thumbnail,
+        }
+      );
     } catch (error) {
       console.log(error);
     }
+  };
+
+  const notify = () => {
+    toast.success("Book added.", {
+      position: "top-center",
+      autoClose: 1000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: false,
+      progress: undefined,
+      theme: "light",
+    });
   };
 
   return (
@@ -111,7 +129,7 @@ const Home = () => {
                   <>
                     <div>
                       <form
-                        className="w-[200px] my-5  rounded-lg"
+                        className="w-[200px] my-5 rounded-lg"
                         onSubmit={handleSubmit}
                       >
                         <div className="flex items-center justify-center">
@@ -135,11 +153,13 @@ const Home = () => {
                               setBookTitle({ title });
                               setBookAuthor({ author });
                               setBookThumbnail({ thumbnail });
+                              notify();
                             }}
                             type="submit"
                           >
                             book
                           </button>
+                          <ToastContainer className="mt-[100px]" />
                         </div>
                       </form>
                     </div>

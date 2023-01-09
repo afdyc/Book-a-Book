@@ -26,7 +26,10 @@ const Login = () => {
     e.preventDefault();
     try {
       await axios
-        .post("http://localhost:5000/login", { username, password })
+        .post("https://bookabookbackend.tech.afdyclinton.com/login", {
+          username,
+          password,
+        })
         .then((response) => {
           authSuccess();
           console.log(response.data);

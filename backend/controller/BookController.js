@@ -1,6 +1,6 @@
-import Books from "../models/BookModel.js";
+const Books = require("../models/BookModel.js");
 
-export const borrowedBookList = async (req, res) => {
+exports.borrowedBookList = async (req, res) => {
   try {
     const borrowedList = await Books.find();
     res.json(borrowedList);
@@ -10,7 +10,7 @@ export const borrowedBookList = async (req, res) => {
   }
 };
 
-export const saveBook = async (req, res) => {
+exports.saveBook = async (req, res) => {
   const book = new Books(req.body);
   try {
     const newBook = await book.save();
@@ -21,7 +21,7 @@ export const saveBook = async (req, res) => {
   }
 };
 
-export const deleteBook = async (req, res) => {
+exports.deleteBook = async (req, res) => {
   try {
     const discardBook = await Books.deleteOne({ _id: req.params.id });
     res.status(200).json(discardBook);

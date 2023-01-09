@@ -1,8 +1,8 @@
-import express from "express";
-import mongoose from "mongoose";
-import cors from "cors";
-import UserRouter from "./routes/UserRoutes.js";
-import BookRouter from "./routes/BookRoutes.js";
+const express = require("express");
+const mongoose = require("mongoose");
+const cors = require("cors");
+const UserRouter = require("./routes/UserRoutes.js");
+const BookRouter = require("./routes/BookRoutes.js");
 
 const app = express();
 
@@ -17,5 +17,9 @@ app.use(cors());
 app.use(express.json());
 app.use(UserRouter);
 app.use(BookRouter);
+
+app.get("/", function (req, res) {
+  res.send("book a book!!!!!!!!!!!!!!");
+});
 
 app.listen(5000, () => console.log("Database is running..."));

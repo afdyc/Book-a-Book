@@ -1,6 +1,6 @@
-import Users from "../models/UserModel.js";
+const Users = require("../models/UserModel.js");
 
-export const getUser = async (req, res) => {
+exports.getUser = async (req, res) => {
   try {
     const users = await Users.find();
     res.json(users);
@@ -9,7 +9,7 @@ export const getUser = async (req, res) => {
   }
 };
 
-export const getUserById = async (req, res) => {
+exports.getUserById = async (req, res) => {
   try {
     const user = await Users.findById(req.params.id);
     res.json(user);
@@ -19,7 +19,7 @@ export const getUserById = async (req, res) => {
   }
 };
 
-export const saveUser = async (req, res) => {
+exports.saveUser = async (req, res) => {
   const user = new Users(req.body);
   try {
     const newUser = await user.save();
@@ -30,7 +30,7 @@ export const saveUser = async (req, res) => {
   }
 };
 
-export const deleteUser = async (req, res) => {
+exports.deleteUser = async (req, res) => {
   try {
     const dropUser = await Users.deleteOne({ _id: req.params.id });
     res.status(200).json(dropUser);
