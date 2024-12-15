@@ -1,11 +1,9 @@
-import express from "express";
-import Users from "../models/UserModel.js";
-import {
-  getUser,
-  getUserById,
-  saveUser,
-  deleteUser,
-} from "../controller/UserController.js";
+const express = require("express");
+const Users = require("../models/UserModel.js");
+const getUser = require("../controller/UserController.js").getUser;
+const getUserById = require("../controller/UserController.js").getUserById;
+const saveUser = require("../controller/UserController.js").saveUser;
+const deleteUser = require("../controller/UserController.js").deleteUser;
 
 const router = express.Router();
 
@@ -32,8 +30,8 @@ router.post("/login", function (req, res) {
 
     if (user) {
       if (user.password === passwd) {
-        // console.log("logged in");
-        return res.status(200).send();
+        console.log("logged in");
+        return res.json(user._id);
       } else if (user.password !== passwd) {
         // console.log("Password is incorrect");
         return res.status(404).send();
@@ -42,4 +40,4 @@ router.post("/login", function (req, res) {
   });
 });
 
-export default router;
+module.exports = router;
